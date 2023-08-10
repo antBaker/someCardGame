@@ -26,13 +26,14 @@ public class Deck{
     }
     public static void main(String[] args){
         
-        int [] deck, shuffleDeck;
+        int [] deck, shuffledDeck;
 
         deck = makeDeck();
+        System.out.println(Arrays.toString(deck));
         shuffledDeck = shuffleDeck(deck);
 
-
-        System.out.println(Arrays.toString(deck));
+        
+        //System.out.println(Arrays.toString(deck));
         shuffleDeck(deck);
         System.out.println(Arrays.toString(deck));
         
