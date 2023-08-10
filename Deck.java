@@ -17,15 +17,23 @@ public class Deck{
 
         return nums;
     }
-    public static void main(String[] args){
+    public static int [] makeDeck(){
         int [] deck = new int [52]; //52 size of deck
         for(int i = 0; i < 52; i++){
             deck[i] = i;
         }
+        return deck;
+    }
+    public static void main(String[] args){
         
-        int [] shuffledDeck = shuffleDeck(deck);
+        int [] deck, shuffledDeck;
 
+        deck = makeDeck();
         System.out.println(Arrays.toString(deck));
+        shuffledDeck = shuffleDeck(deck);
+
+        
+        //System.out.println(Arrays.toString(deck));
         shuffleDeck(deck);
         System.out.println(Arrays.toString(deck));
         
