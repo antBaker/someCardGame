@@ -14,7 +14,7 @@ public class Deck{
         return deck;
     }// end of function
 
-    public static void pyramid(int[] deck){
+    public static void pyramid(String[] deck){
         int num = 0;
         //builds a pyramid out of the shuffled deck
         for(int i=0; i < 8; i++){
@@ -29,14 +29,14 @@ public class Deck{
         }//end of for loop
     }//end of pyramid class
 
-    public static int [] shuffleDeck(int [] nums){
+    public static String [] shuffleDeck(String [] nums){
 
         Random rand = new Random();
         int range = 52;
 
         for(int i = nums.length - 1; i > -1; i--){
             int r = rand.nextInt(range);
-            int tmp = nums[i];
+            String tmp = nums[i];
             nums[i] = nums[r];
             nums[r] = tmp;
             range--;
@@ -45,16 +45,17 @@ public class Deck{
         return nums;
     }
     public static void main(String[] args){
-        int [] deck = new int [52]; //52 size of deck
+        /*int [] deck = new int [52]; //52 size of deck
         for(int i = 0; i < 52; i++){
             deck[i] = i;
-        }
+        }*/
         
-        int [] shuffledDeck = shuffleDeck(deck);
+        String [] shuffledDeck = deckOfCards();
+        shuffledDeck = shuffleDeck(shuffledDeck);
 
-        System.out.println(Arrays.toString(deck));
-        shuffleDeck(deck);
-        System.out.println(Arrays.toString(deck));
-        pyramid(deck);
+        //System.out.println(Arrays.toString(deck));
+        //shuffleDeck(deck);
+        //System.out.println(Arrays.toString(deck));
+        pyramid(shuffledDeck);
     }
 }
