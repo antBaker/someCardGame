@@ -1,19 +1,12 @@
 # someCardGame.java
-Will be updated. Still confirming project.
-Undisclosed card game name will be programmed and shown off to the RU CSC 102 2023 group of students.
-Group Members: TBD
-Antony Baker (myself)
-Jobayer Hossain 
-Tosca Stoloff (TBD)
-Group Name: TBD
 
 Group name: [Free Space]
 
 Group members: [Antony Baker, Jobayer Hossain, Tosca Stoloff]
 
-Group mentor: [TBD]
+Group mentor: [Richard Drinkwater]
 
-Project title: [TBD]
+Project title: [Pyramid Solataire]
 
 Project page: [https://github.com/antBaker/someCardGame]
 
