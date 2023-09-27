@@ -29,7 +29,7 @@ public class Card {
     public String toString(){
         return CARDFACES[this.faceValue] +  SUITS[this.suit];
     }
-
+    
     public String toCardFace(){
         int i = this.cardValue;
         String [] suites = {"A", "B", "C", "D"}; //these are hexadecimal values don't change

@@ -54,11 +54,11 @@ public class Deck{
         Random rand = new Random();
         int range = 52;
 
-        for(int i = this.deck.length - 1; i > -1; i--){
+        for(int i = deck.length - 1; i > -1; i--){
             int r = rand.nextInt(range);
-            Card tmp = this.deck[i];
-            this.deck[i] = this.deck[r];
-            this.deck[r] = tmp;
+            Card tmp = deck[i];
+            deck[i] = deck[r];
+            deck[r] = tmp;
             range--;
         }
     }
