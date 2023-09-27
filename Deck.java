@@ -1,44 +1,60 @@
 import java.util.*;
 public class Deck{
-    private Card[] row1;
-    private Card[] row2;
-    private Card[] row3;
-    private Card[] row4;
-    private Card[] row5;
-    private Card[] row6;
-    private Card[] row7;
 
-    private Card card;
-    private CardList cardlist;
-
-    private int remainingCardIndex = 0;
-
-    public Deck(){
-        card = new Card("", "");
-        cardlist = new CardList();
-        row1 = new Card[1];
-        row2 = new Card[2];
-        row3 = new Card[3];
-        row4 = new Card[4];
-        row5 = new Card[5];
-        row6 = new Card[6];
-        row7 = new Card[7];
-    }
-
-    public void deckOfCards(){
-        String[] ranks = card.getRANKS();
-        String[] suits = card.getSUITS();
-        Card[] deck = new Card[52];
+    public static String[] deckOfCards(){
+        //creates a deck of cards with suit and rank
+        //we don't absolutly need this because we can print the card characters now but I will leave it in because it still may be useful
+        char[] suit = {'S', 'D', 'C', 'H'};
+        String[] rank = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        String[] deck = new String[52];
         for(int i = 0; i < deck.length; i++){
-            deck[i] =new Card(ranks[i%13], suits[i/13]);
-        }
-        deck = shuffleDeck(deck);
-        for(int i = 0; i < deck.length; i++){
-            cardlist.add(deck[i]);
-        }
-    }
+            deck[i] = rank[i%13] + suit[i/13];
+        }//end of for loop
+        return deck;
+    }// end of function
 
-    public Card[] shuffleDeck(Card[] nums){
+    public static void pyramid(String[] deck){
+        int num = 0;
+        //builds a pyramid out of the shuffled deck
+        for(int i=0; i < 8; i++){
+            for(int j = 7; j > i; j--){
+                System.out.print(" ");
+            }
+            for (int k = 0; k < i; k++){
+                System.out.print(deck[num] + " ");
+                num += 1;
+            }
+            System.out.println();
+        }//end of for loop
+    }//end of pyramid class
+
+    public static String [] printCards(int [] nums){
+        /**prints out an array of a deck showing card characters */
+        String [] suites = {"A", "B", "C", "D"}; //these are hexadecimal values don't change
+        String [] numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};// these are also hexadecimal DON'T CHANGE
+        String [] out = new String [52];
+            int j = 0;
+			for(int i:nums){
+				//This is done so we don't have either an extra queen or knight card if we want knigh its 12 if we want queen it must be 11
+				if(i >= 12 && i < 24 ){
+					i = i + 1;
+				}else if(i >= 24 && i < 36){
+					i += 2;
+				}else if(i >= 36 && i < 48){
+					i += 3;
+				}else if(i >= 48){
+					i += 4;
+				}
+				String card = suites[i/14] + numbers[i%14];
+				int c = Integer.parseInt("DC" + card, 16);
+				String s = "\uD83C" + (char) c;
+                out[j++] = s;
+				System.out.print(s + " ");
+			}//end of for loop
+        return out; // returns array of printed card characters
+        }//end of printCards method
+
+    public static int [] shuffleDeck(int [] nums){
 
         Random rand = new Random();
         int range = 52;
@@ -52,68 +68,19 @@ public class Deck{
         }
         return nums;
     }
-
-    public void storeCards(){
-        for(int i = 0; i < 28; i++){
-            if(i == 0){
-                row1[i] = cardlist.getCard(i);
-            }
-            if( i >= 1 && i <= 2){
-                row2[i - 1] = cardlist.getCard(i);
-            }
-            if( i >= 3 && i <=5 ){
-                row3[i - 3] = cardlist.getCard(i);
-            }
-            if( i >= 6 && i <=9){
-                row4[i-6] = cardlist.getCard(i);
-            }
-            if( i >= 10 && i <= 14){
-                row5[i - 10] = cardlist.getCard(i);
-            }
-            if( i >= 15 && i <= 20){
-                row6[i-15] = cardlist.getCard(i);
-            }
-            if(i >= 21 && i <= 27){
-                row7[i-21] = cardlist.getCard(i);
-            }
-        }
-    }
-
-    public void pyramid(){
-        int num = 0;
-        for(int i=0; i < 8; i++){
-            for(int j = 7; j > i; j--){
-                System.out.print(" ");
-            }
-            for (int k = 0; k < i; k++){
-                System.out.print(cardlist.getCard(num) + " ");
-                num += 1;
-            }
-            System.out.println();
-        }
-        for(int i = 0; i < 28; i++){
-            cardlist.remove(cardlist.getCard(0));
-        }
-    }
-
-    public Card drawCard(){
-        if(remainingCardIndex >= cardlist.getSize()){
-            remainingCardIndex = 0;
-        }
-        Card drawnCard = cardlist.getCard(remainingCardIndex);
-        remainingCardIndex++;
-
-        return drawnCard;
-    }
-
     public static void main(String[] args){
-        Deck deck = new Deck();
-        deck.deckOfCards();
-        deck.storeCards();
-        deck.pyramid();
-        for(int i = 0; i < 26; i++){
-            Card draw = deck.drawCard();
-            System.out.println("Drawn card: " + draw);
+        int [] deck = new int [52]; //52 size of deck
+        for(int i = 0; i < 52; i++){
+            deck[i] = i;
         }
+        
+        //String [] shuffledDeck = deckOfCards();
+        String [] shuffledDeck = printCards(shuffleDeck(deck));
+        //shuffledDeck = shuffleDeck(shuffledDeck);
+
+        //System.out.println(Arrays.toString(deck));
+        //shuffleDeck(deck);
+        //System.out.println(Arrays.toString(deck));
+        pyramid(shuffledDeck);
     }
 }
