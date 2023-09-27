@@ -4,87 +4,66 @@ import java.util.Arrays;
 
 public class Deck{
 
-    public static String[] deckOfCards(){
-        //creates a deck of cards with suit and rank
-        //we don't absolutly need this because we can print the card characters now but I will leave it in because it still may be useful
-        char[] suit = {'S', 'D', 'C', 'H'};
-        String[] rank = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        String[] deck = new String[52];
-        for(int i = 0; i < deck.length; i++){
-            deck[i] = rank[i%13] + suit[i/13];
-        }//end of for loop
-        return deck;
-    }// end of function
+    private static Card[] deck;
 
-    public static void pyramid(String[] deck){
+    public Deck(){
+        // creates deck of size 52
+        deck = new Card[52];
+        
+        // unsorted ordered set of cards
+        for(int i = 0; i < 52; i++){
+            deck[i] = new Card(i%13,i/13,i);
+        }
+
+    }
+
+    public String toString(){
+        String out = "";
+        for(int i = 0; i < deck.length; i++){
+            out += deck[i].toString() + ",";
+        }
+        return out;
+    }
+
+    public String toCards(){
+        String out = "";
+        for(int i = 0; i < deck.length; i++){
+            out += deck[i].toCardFace();
+        }
+        return out;
+    }
+
+
+    public static String pyramid(){
         int num = 0;
+        String out = "";
         //builds a pyramid out of the shuffled deck
         for(int i=0; i < 8; i++){
             for(int j = 7; j > i; j--){
-                System.out.print(" ");
+                out+= " ";
             }
             for (int k = 0; k < i; k++){
-                System.out.print(deck[num] + " ");
+                out += deck[num].toCardFace() + " ";
                 num += 1;
             }
-            System.out.println();
+            out += "\n";
+            
         }//end of for loop
+        return out;
     }//end of pyramid class
 
-    public static String [] printCards(int [] nums){
-        /**prints out an array of a deck showing card characters */
-        String [] suites = {"A", "B", "C", "D"}; //these are hexadecimal values don't change
-        String [] numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};// these are also hexadecimal DON'T CHANGE
-        String [] out = new String [52];
-            int j = 0;
-			for(int i:nums){
-				//This is done so we don't have either an extra queen or knight card if we want knigh its 12 if we want queen it must be 11
-				if(i >= 12 && i < 24 ){
-					i = i + 1;
-				}else if(i >= 24 && i < 36){
-					i += 2;
-				}else if(i >= 36 && i < 48){
-					i += 3;
-				}else if(i >= 48){
-					i += 4;
-				}
-				String card = suites[i/14] + numbers[i%14];
-				int c = Integer.parseInt("DC" + card, 16);
-				String s = "\uD83C" + (char) c;
-                out[j++] = s;
-				System.out.print(s + " ");
-			}//end of for loop
-        return out; // returns array of printed card characters
-        }//end of printCards method
-
-    public static int [] shuffleDeck(int [] nums){
+    public void shuffle(){
 
         Random rand = new Random();
         int range = 52;
 
-        for(int i = nums.length - 1; i > -1; i--){
+        for(int i = this.deck.length - 1; i > -1; i--){
             int r = rand.nextInt(range);
-            int tmp = nums[i];
-            nums[i] = nums[r];
-            nums[r] = tmp;
+            Card tmp = this.deck[i];
+            this.deck[i] = this.deck[r];
+            this.deck[r] = tmp;
             range--;
         }
-
-        return nums;
     }
-    public static void main(String[] args){
-        int [] deck = new int [52]; //52 size of deck
-        for(int i = 0; i < 52; i++){
-            deck[i] = i;
-        }
-        
-        //String [] shuffledDeck = deckOfCards();
-        String [] shuffledDeck = printCards(shuffleDeck(deck));
-        //shuffledDeck = shuffleDeck(shuffledDeck);
-
-        //System.out.println(Arrays.toString(deck));
-        //shuffleDeck(deck);
-        //System.out.println(Arrays.toString(deck));
-        pyramid(shuffledDeck);
-    }
+    
 }
