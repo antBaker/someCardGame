@@ -1,7 +1,4 @@
-import java.util.Random;
-import java.util.Arrays;
-
-
+import java.util.*;
 public class Deck{
 
     private static Card[] deck;
@@ -34,7 +31,7 @@ public class Deck{
     }
 
 
-    public static String pyramid(){
+    public String pyramid(){
         int num = 0;
         String out = "";
         //builds a pyramid out of the shuffled deck
