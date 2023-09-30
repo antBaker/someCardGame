@@ -3,17 +3,12 @@ public class Psolataire {
     public static void main(String[] args){
 
         Deck deck = new Deck();
-        System.out.println(deck.toString());
-        System.out.println();
-
-        System.out.println(deck.toCards());
-
-        deck.shuffle();
-        System.out.println(deck.toString());
-        System.out.println();
-
-        System.out.println(deck.toCards());
-
-        System.out.println(deck.pyramid());
+        try{
+            Pyramid pyramid = new Pyramid(deck);
+            
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        
     }
 }

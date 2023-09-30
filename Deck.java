@@ -14,6 +14,27 @@ public class Deck{
 
     }
 
+    public Card getCard(int index){
+        return deck[index];
+    }
+
+    public int length(){
+        return this.deck.length;
+    }
+
+    public Card[] getCardsFrom(int index){
+        Card[] cards = new Card[this.length()-index];
+        int i = 0;
+        for(Card card: this.deck){
+            if(i == cards.length){
+                return cards;
+            }
+            cards[i++] = card;
+
+        }
+        return cards;
+    }
+
     public String toString(){
         String out = "";
         for(int i = 0; i < deck.length; i++){
