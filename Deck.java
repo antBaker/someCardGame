@@ -9,7 +9,7 @@ public class Deck{
         
         // unsorted ordered set of cards
         for(int i = 0; i < 52; i++){
-            deck[i] = new Card(i%13,i/13,i);
+            deck[i] = new Card(i%13,i/13);
         }
 
     }
@@ -19,17 +19,17 @@ public class Deck{
     }
 
     public int length(){
-        return this.deck.length;
+        return deck.length;
     }
 
     public Card[] getCardsFrom(int index){
-        Card[] cards = new Card[this.length()-index];
+        Card[] cards = new Card[this.length()-index];   // starts from 52 to index in this case from 52-28 = 24
         int i = 0;
-        for(Card card: this.deck){
+        for(Card card: deck){
             if(i == cards.length){
                 return cards;
             }
-            cards[i++] = card;
+            cards[i] = card;
 
         }
         return cards;
@@ -46,7 +46,7 @@ public class Deck{
     public String toCards(){
         String out = "";
         for(int i = 0; i < deck.length; i++){
-            out += deck[i].toCardFace();
+            out += deck[i].toCardFace(i);
         }
         return out;
     }
@@ -61,7 +61,7 @@ public class Deck{
                 out+= " ";
             }
             for (int k = 0; k < i; k++){
-                out += deck[num].toCardFace() + " ";
+                out += deck[num].toCardFace(i) + " ";
                 num += 1;
             }
             out += "\n";
@@ -72,7 +72,7 @@ public class Deck{
 
     public void shuffle(){
 
-        Random rand = new Random();
+        Random rand = new Random(12345);
         int range = 52;
 
         for(int i = deck.length - 1; i > -1; i--){
