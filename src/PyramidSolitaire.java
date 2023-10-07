@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class PyramidSolitaire {
     
     public Deck deckOfCards;
@@ -9,10 +11,7 @@ public class PyramidSolitaire {
     private int draws;
     private int score;
 
-    public PyramidSolitaire(Deck deck, int numRows) throws Exception{
-        if(numRows >= 10){
-            throw new Exception("Max amount of rows is 9");
-        }
+    public PyramidSolitaire(Deck deck, int numRows) {
 
         deckOfCards = deck;
         this.numRows = numRows;
@@ -85,8 +84,27 @@ public class PyramidSolitaire {
         return "(Size: + " + size + " ) " + out ;
     }
 
-    public void matchKing(int idx) throws Exception{
-        if(pyramid.get(idx).getRankValue() == 13){
+    public boolean validIndex(int index, int row) {
+        if(row == 7){
+            return true;
+        }
+        int directBelow = index+row;
+        int belowRight = index+row+1;
+        if(pyramid.get(directBelow).isFaceUp() && pyramid.get(belowRight).isFaceUp()){
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
+
+    public void matchKing(int idx, int row) throws Exception{
+
+        if(!(validIndex(idx, row))){
+            throw new Exception("cards below are not matched");
+        }
+
+        if(pyramid.get(idx).getRankValue() == 13 ){
             pyramid.set(idx, new Card(false));
         }else{
             throw new Exception("Not a king");
@@ -94,7 +112,10 @@ public class PyramidSolitaire {
         score += 50;
     }
 
-    public void matchCard(int idx, int idx2) throws Exception{
+    public void matchCard(int idx, int row, int idx2, int row2) throws Exception{
+        if(!(validIndex(idx2, row2) && validIndex(idx, row))){
+            throw new Exception("Cards below have not been matched");
+        }
 
         if(pyramid.get(idx).getRankValue() + pyramid.get(idx2).getRankValue() == 13){
             pyramid.set(idx, new Card(false));
@@ -106,17 +127,21 @@ public class PyramidSolitaire {
 
     }
 
-    public void matchFromDraw(int idx, int idx2){
-        if(drawPile.get(0).getRankValue() + pyramid.get(idx2).getRankValue() == 13){
+    public void matchFromDraw(int idx, int row){
+        if(drawPile.get(0).getRankValue() + pyramid.get(0).getRankValue() == 13){
             pyramid.set(idx, new Card(false));
             drawPile.remove(0);
         }
     }
 
     public void drawFromPile() throws Exception{
-        
+        if(draws == 24*3){
+            JOptionPane.showMessageDialog(null,"YOU LOSE!");
+            int i = JOptionPane.showOptionDialog(null,"Do you want to try again?", null, 1, 1, null, null, 1);
+            System.exit(1);
+        }
         if(drawPile.size() == 1){
-            throw new Exception("Sorry drawPile is empty");
+            throw new Exception("Sorry draw Pile is empty");
         }else{
             drawPile.add(drawPile.get(0));      //adds first index at end
             drawPile.remove(0);                 //removes first index so there's no duplicate card

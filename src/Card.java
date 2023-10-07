@@ -31,6 +31,10 @@ public class Card {
         return rank.getRank();
     }
 
+    public boolean isFaceUp(){
+        return this.isFaceUp;
+    }
+
     public String toString(){
         String str = "";
         if(isFaceUp) {

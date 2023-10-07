@@ -15,51 +15,55 @@ public class Test {
             
 
             switch(in.next().toLowerCase()){
-                case("q"):
-                
-                return;
+                case("q"): in.close();return;
                 case("s"):
-                    try{
+                    
                         Deck deck = new Deck();
                         PyramidSolitaire p = new PyramidSolitaire(deck, 7);
                         p.setGame();
 
                         while(true){
-                        
+                        try{
+                        System.out.println(p.printPyramid());
+                        System.out.println(p.printDrawPile());
                         System.out.println("\tWhich cards would you like to match?\t");
-                        System.out.println("(k)ing, (1)for one card in pyramid and one in Draw Pile (2)for cards int pyramid");
+                        System.out.println("(k)ing, \n(1)for one card in pyramid and one in Draw Pile \n(2)for cards in pyramid\n(3) To draw card");
 
                         switch(in.next().toLowerCase()){
                             case("k"):
-                            System.out.println("Please give index in brackets");
-                                p.matchKing(in.nextInt());
+                            System.out.println("Please give index in brackets and then give row");
+                                p.matchKing(in.nextInt(), in.nextInt());
                                 System.out.println(p.printPyramid());
                             break;
 
                             case("1"):
-                            System.out.println("Please give index(s) in brackets");
+                            System.out.println("Please give index(s) in brackets and then give row (in that order)");
                                 p.matchFromDraw(in.nextInt(), in.nextInt());
                                 System.out.println(p.printPyramid());
                             break;
 
                             case("2"):
-                            System.out.println("Please give index(s) in brackets");
-                                p.matchCard(in.nextInt(), in.nextInt());
-                                System.out.println(p.printPyramid());
+                            System.out.println("Please give index(s) then row (twice)");
+                                p.matchCard(in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt());
+                                System.out.println();
+                            break;
+                            case("3"):
+                                p.drawFromPile();
+                                System.out.println();
                             break;
                             
                             case("q"):
                             System.exit(1);
                         }
-                        }
                     }catch(Exception e){
                         System.err.println(e.getMessage());
-                        break;
                     }
-                
+                }
+
                 default:
                     break;
         }
+        in.close();
 /*      p.setGame(deck, 0);
         p.setGame(deck, 1);
         p.setGame(deck,2);
@@ -71,8 +75,6 @@ public class Test {
         p.setGame(deck, 8);
         p.setGame(deck, 9);
 */
-
-        
         //p.setGame(deck, 10);      //will fall off can't ask for more cards than in deck
     }
 }
