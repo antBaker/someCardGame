@@ -26,8 +26,9 @@ public class Test {
                         try{
                         System.out.println(p.printPyramid());
                         System.out.println(p.printDrawPile());
-                        System.out.println("\tWhich cards would you like to match?\t");
-                        System.out.println("(k)ing, \n(1)for one card in pyramid and one in Draw Pile \n(2)for cards in pyramid\n(3) To draw card");
+                        System.out.println("SCORE : " + p.getScore()+ "\n");
+                        System.out.println("\tWhat type would you like to match?\t");
+                        System.out.println("(k)ing, \n(1)for one card in pyramid and one in Draw Pile \n(2)for two cards both in pyramid\n(3)To draw card from the draw pile");
 
                         switch(in.next().toLowerCase()){
                             case("k"):
@@ -37,7 +38,7 @@ public class Test {
                             break;
 
                             case("1"):
-                            System.out.println("Please give index(s) in brackets and then give row (in that order)");
+                            System.out.println("Please give index(s) in brackets and then give row (in that order)" );
                                 p.matchFromDraw(in.nextInt(), in.nextInt());
                                 System.out.println(p.printPyramid());
                             break;

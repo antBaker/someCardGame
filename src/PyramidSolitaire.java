@@ -127,10 +127,12 @@ public class PyramidSolitaire {
 
     }
 
-    public void matchFromDraw(int idx, int row){
-        if(drawPile.get(0).getRankValue() + pyramid.get(0).getRankValue() == 13){
+    public void matchFromDraw(int idx, int row) throws Exception{
+        if(drawPile.get(0).getRankValue() + pyramid.get(idx).getRankValue() == 13){
             pyramid.set(idx, new Card(false));
             drawPile.remove(0);
+        }else{
+            throw new Exception("Cards do not match to 13");
         }
     }
 
@@ -149,6 +151,14 @@ public class PyramidSolitaire {
         }
         
 
+    }
+
+    public int getScore(){
+        return this.score;
+    }
+
+    public int getDraws(){
+        return this.draws;
     }
 
     
