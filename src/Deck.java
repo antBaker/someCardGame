@@ -29,7 +29,7 @@ public class Deck {
 
     public void shuffle(){
 
-        Random rand = new Random(12345);
+        Random rand = new Random(); // use seed 12345 to get example deck
         int range = 52;
         Card [] cards = new Card[deck.size()];
 

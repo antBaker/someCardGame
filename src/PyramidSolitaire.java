@@ -20,7 +20,7 @@ public class PyramidSolitaire {
         deckOfCards.shuffle();
     }
 
-    private String printPyramid(ArrayList<Card> cards, int numRows){
+/*    private String printPyramid(ArrayList<Card> cards, int numRows){
         int num = 0;
         String out = "";
         //builds a pyramid out of the shuffled deck
@@ -34,10 +34,9 @@ public class PyramidSolitaire {
             out += "\n";
             
         }//end of for loop
-
         return out;
     }
-
+*/
     public String printPyramid(){
         int num = 0;
         String out = "";
@@ -56,7 +55,7 @@ public class PyramidSolitaire {
         return out;
     }
 
-    private String printDrawPile(ArrayList<Card> cards){
+/*    private String printDrawPile(ArrayList<Card> cards){
         String out = "";
         int size = 0;
         out += "Draw Pile ";
@@ -69,7 +68,7 @@ public class PyramidSolitaire {
 
         return "(Size: + " + size + " ) " + out ;
     }
-
+*/
     public String printDrawPile(){
         String out = "";
         int size = 0;
