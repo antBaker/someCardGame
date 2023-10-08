@@ -106,10 +106,20 @@ public class PyramidSolitaire {
 
         if(pyramid.get(idx).getRankValue() == 13 ){
             pyramid.set(idx, new Card(false));
+            score += 50;
         }else{
             throw new Exception("Not a king");
         }
-        score += 50;
+        
+    }
+
+    public void matchKingDiscard() throws Exception{
+        if(drawPile.get(0).getRankValue() == 13){
+            drawPile.remove(0);
+            score += 50;
+        }else{
+            throw new Exception("Not a king");
+        }
     }
 
     public void matchCard(int idx, int row, int idx2, int row2) throws Exception{
@@ -120,10 +130,11 @@ public class PyramidSolitaire {
         if(pyramid.get(idx).getRankValue() + pyramid.get(idx2).getRankValue() == 13){
             pyramid.set(idx, new Card(false));
             pyramid.set(idx2, new Card(false));
+            score +=50;
         }else{
             throw new Exception("Sorry cards do not match to 13");
         }
-        score +=50;
+        
 
     }
 
@@ -131,6 +142,7 @@ public class PyramidSolitaire {
         if(drawPile.get(0).getRankValue() + pyramid.get(idx).getRankValue() == 13){
             pyramid.set(idx, new Card(false));
             drawPile.remove(0);
+            score += 50;
         }else{
             throw new Exception("Cards do not match to 13");
         }
@@ -148,6 +160,7 @@ public class PyramidSolitaire {
             drawPile.add(drawPile.get(0));      //adds first index at end
             drawPile.remove(0);                 //removes first index so there's no duplicate card
             draws++;
+            score-=1;
         }
         
 
@@ -171,13 +184,22 @@ public class PyramidSolitaire {
             pyramid.add(deckOfCards.getCard(i));
             //System.out.println(i);
         }
-        System.out.println(printPyramid(pyramid, numRows));
+        //System.out.println(printPyramid(pyramid, numRows));
 
         // initialize drawPile cards
         for(int i = Integer.parseInt("" + ((numRows*numRows) + numRows)/2); i < 52; i++){
             drawPile.add(deckOfCards.getCard(i));
         }
-        System.out.println(printDrawPile(drawPile));        
+        //System.out.println(printDrawPile(drawPile));        
+    }
+
+    public boolean gameOver(){
+        for(int i = 0; i < pyramid.size(); i++){
+            if(pyramid.get(i).isFaceUp()){
+                return false;
+            }
+        }
+        return true; // all cards in pyramid are face down
     }
 
     

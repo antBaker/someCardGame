@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 public class Test {
     
     public static void main(String[] args){
@@ -27,20 +29,31 @@ public class Test {
                         System.out.println(p.printPyramid());
                         System.out.println(p.printDrawPile());
                         System.out.println("SCORE : " + p.getScore()+ "\n");
+                        if(p.gameOver()){
+                            JOptionPane.showMessageDialog(null, "YOU WIN");
+                        }
                         System.out.println("\tWhat type would you like to match?\t");
                         System.out.println("(k)ing, \n(1)for one card in pyramid and one in Draw Pile \n(2)for two cards both in pyramid\n(3)To draw card from the draw pile");
 
                         switch(in.next().toLowerCase()){
                             case("k"):
-                            System.out.println("Please give index in brackets and then give row");
+                            System.out.println("(d) for discard pile king and (n) for normal");
+                            switch(in.next().toLowerCase()){
+                                case("d"):
+                                p.matchKingDiscard();
+                                break;
+                                case("n"):
+                                System.out.println("Please give index in brackets and then give row");
                                 p.matchKing(in.nextInt(), in.nextInt());
-                                System.out.println(p.printPyramid());
+                                break;
+                                //System.out.println(p.printPyramid());
+                            }
                             break;
 
                             case("1"):
                             System.out.println("Please give index(s) in brackets and then give row (in that order)" );
                                 p.matchFromDraw(in.nextInt(), in.nextInt());
-                                System.out.println(p.printPyramid());
+                                //System.out.println(p.printPyramid());
                             break;
 
                             case("2"):
@@ -51,6 +64,9 @@ public class Test {
                             case("3"):
                                 p.drawFromPile();
                                 System.out.println();
+                            break;
+                            default:
+                            System.out.println("Sorry unexpected input please input either (k), (1), (2), (3), (q) to quit");
                             break;
                             
                             case("q"):
